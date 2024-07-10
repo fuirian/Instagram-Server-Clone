@@ -1,13 +1,13 @@
-package mjuphotolab.photolabbe.domain.exhibition.repository;
+package instagram.server.comment.repository;
 
-import mjuphotolab.photolabbe.domain.exhibition.entity.Exhibition;
+import instagram.server.comment.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ExhibitionRepository extends JpaRepository<Exhibition, Long> {
-    List<Exhibition> findAllBy();
+public interface CommentRepository extends JpaRepository<Comment, Long> {
+    List<Comment> findAllBy();
 
-    Optional<Exhibition> findById(Long exhibitionId);
+    Optional<Comment> findById(Long commentId);
 }

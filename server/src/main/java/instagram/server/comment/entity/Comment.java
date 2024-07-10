@@ -1,8 +1,6 @@
-package mjuphotolab.photolabbe.domain.competition.entity;
+package instagram.server.comment.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import instagram.server.user.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,37 +15,28 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import mjuphotolab.photolabbe.common.BaseEntity;
-import mjuphotolab.photolabbe.domain.photo.entity.Photo;
-import mjuphotolab.photolabbe.domain.user.entity.User;
+
+import java.util.ArrayList;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Competition extends BaseEntity {
+public class Comment{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "competition_id")
+	@Column(name = "comment_id")
 	private Long id;
 
-	private String title;
 	private String content;
-	private int awardCount;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@OneToMany(mappedBy = "competition", cascade = CascadeType.ALL)
-	private List<Photo> photos = new ArrayList<>();
-
 	@Builder
-	private Competition(final String title, final String content, final int awardCount, final User user, final List<Photo> photos) {
+	private Comment(final String content, final User user) {
 		this.user = user;
-		this.title = title;
 		this.content = content;
-		this.awardCount = awardCount;
-		this.photos = photos;
 	}
 }

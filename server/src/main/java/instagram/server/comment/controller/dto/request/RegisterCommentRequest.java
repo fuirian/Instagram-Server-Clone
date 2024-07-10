@@ -1,22 +1,19 @@
-package instagram.server.post.controller.dto.request;
+package instagram.server.comment.controller.dto.request;
 
-import instagram.server.post.entity.Post;
+
+import instagram.server.comment.entity.Comment;
 import instagram.server.user.User;
 import lombok.Getter;
 
-
 @Getter
-public class RegisterPostRequest {
+public class RegisterCommentRequest {
 
     private User user;
-    private String title;
     private String content;
-    //private List<ExhibitionPhotoDto> exhibitionphotoDtos;
 
-    public Post toEntity(User user) {
-        return Post.builder()
+    public Comment toEntity(User user) {
+        return comment.builder()
                 .user(user)
-                .title(title)
                 .content(content)
                 .build();
     }

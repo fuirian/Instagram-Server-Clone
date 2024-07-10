@@ -1,4 +1,4 @@
-package instagram.server.post.controller.dto.respone;
+package instagram.server.post.controller.dto.responese;
 
 import instagram.server.post.entity.Post;
 import lombok.Builder;
@@ -7,7 +7,6 @@ import lombok.Builder;
 public class PostResponse {
     private final String title;
     private final String content;
-    //private final List<PhotoDto> photoDtos;
 
     @Builder
     public PostResponse(String title, String content) {

@@ -1,51 +1,39 @@
-package mjuphotolab.photolabbe.domain.exhibition.service;
+package instagram.server.post.service;
 
+import instagram.server.post.controller.dto.request.RegisterPostRequest;
+import instagram.server.post.controller.dto.request.UpdatePostRequest;
+import instagram.server.post.entity.Post;
+import instagram.server.post.repository.PostRepository;
+import instagram.server.user.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import mjuphotolab.photolabbe.domain.exhibition.controller.dto.request.RegisterExhibitionRequest;
-import mjuphotolab.photolabbe.domain.exhibition.controller.dto.request.UpdateExhibitionRequest;
-import mjuphotolab.photolabbe.domain.exhibition.controller.dto.response.ExhibitionAllResponse;
-import mjuphotolab.photolabbe.domain.exhibition.controller.dto.response.ExhibitionDto;
-import mjuphotolab.photolabbe.domain.exhibition.entity.Exhibition;
-import mjuphotolab.photolabbe.domain.exhibition.repository.ExhibitionRepository;
-import mjuphotolab.photolabbe.domain.user.service.UserService;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class ExhibitionService {
+public class PostService {
 
-    private final ExhibitionRepository exhibitionRepository;
+    private final PostRepository postRepository;
     private final UserService userService;
 
-    public Exhibition save(RegisterExhibitionRequest registerExhibitionRequest, Long userId) {
-        Exhibition exhibition = registerExhibitionRequest.toEntity(userService.findUser(userId));
-        return exhibitionRepository.save(exhibition);
+    public Post save(RegisterPostRequest registerPostRequest, String username) {
+        Post post = registerPostRequest.toEntity(userService.findUser(username));
+        return postRepository.save(post);
     }
 
-    public ExhibitionAllResponse findExhibitions() {
-        List<Exhibition> exhibitions = exhibitionRepository.findAll();
-        List<ExhibitionDto> exhibitionDtos = exhibitions.stream()
-                .map(ExhibitionDto::of)
-                .toList();
-        return ExhibitionAllResponse.of(exhibitionDtos);
-    }
-
-    public Exhibition findExhibition(long id) {
-        return exhibitionRepository.findById(id)
+    public Post findPosts(long id) {
+        return postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
     }
 
     @Transactional
-    public Exhibition update(long id, UpdateExhibitionRequest request) {
-        Exhibition exhibition = exhibitionRepository.findById(id)
+    public Post update(long id, UpdatePostRequest request) {
+        Post post = postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
 
-        exhibition.update(request.getTitle(), request.getContent());
+        post.update(request.getTitle(), request.getContent());
 
-        return exhibition;
+        return post;
     }
 }

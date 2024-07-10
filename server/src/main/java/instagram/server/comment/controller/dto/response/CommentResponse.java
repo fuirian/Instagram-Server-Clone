@@ -1,29 +1,22 @@
 package instagram.server.comment.controller.dto.response;
 
+import instagram.server.comment.entity.Comment;
 import lombok.Builder;
-import mjuphotolab.photolabbe.domain.exhibition.entity.Exhibition;
-import mjuphotolab.photolabbe.domain.photo.controller.dto.response.PhotoDto;
 
 import java.util.List;
 
 @Builder
-public class ExhibitionResponse {
-    private final String title;
+public class CommentResponse {
     private final String content;
-    private final List<PhotoDto> photoDtos;
 
     @Builder
-    public ExhibitionResponse(String title, String content, List<PhotoDto> photoDtos) {
-        this.title = title;
+    public CommentResponse(String content) {
         this.content = content;
-        this.photoDtos = photoDtos;
     }
 
-    public static ExhibitionResponse from(Exhibition exhibition, List<PhotoDto> photoDtos) {
-        return ExhibitionResponse.builder()
-                .title(exhibition.getTitle())
-                .content(exhibition.getContent())
-                .photoDtos(photoDtos)
+    public static CommentResponse from(Comment comment) {
+        return CommentResponse.builder()
+                .content(comment.getContent())
                 .build();
     }
 }

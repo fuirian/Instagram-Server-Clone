@@ -1,6 +1,6 @@
-package mjuphotolab.photolabbe.domain.exhibition.entity;
+package instagram.server.post.entity;
 
-import jakarta.persistence.CascadeType;
+import instagram.server.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,26 +9,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import mjuphotolab.photolabbe.common.BaseEntity;
-import mjuphotolab.photolabbe.domain.photo.entity.Photo;
-import mjuphotolab.photolabbe.domain.user.entity.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Exhibition extends BaseEntity{
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exhibition_id")
+    @Column(name = "postId")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,19 +33,16 @@ public class Exhibition extends BaseEntity{
     private String title;
     private String content;
 
-    @OneToMany(mappedBy = "exhibition",cascade = CascadeType.ALL)
-    private List<Photo> photos = new ArrayList<>();
-
     @Builder
-    private Exhibition(User user, String title, String content, List<Photo> photos) {
+    private Post(User user, String title, String content) {
         this.user = user;
         this.title = title;
         this.content = content;
-        this.photos = photos;
     }
 
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
     }
+
 }

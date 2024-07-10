@@ -1,4 +1,4 @@
-package instagram.server.post.controller.dto.respone;
+package instagram.server.post.controller.dto.responese;
 
 import instagram.server.post.entity.Post;
 import lombok.Builder;
@@ -8,14 +8,14 @@ import java.time.LocalDateTime;
 
 @Getter
 public class PostDto {
-    private final Long postId;
+    private final Long post;
     private final String title;
     private final String content;
     private final LocalDateTime createdAt;
 
     @Builder
-    private PostDto(Long postId, String title, String content, LocalDateTime createdAt) {
-        this.postId = postId;
+    private PostDto(Long post, String title, String content, LocalDateTime createdAt) {
+        this.post = post;
         this.title = title;
         this.content = content;
         this.createdAt = createdAt;
@@ -23,7 +23,7 @@ public class PostDto {
 
     public static PostDto of(Post post) {
         return PostDto.builder()
-                .postId(post.getId())
+                .post(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .createdAt(post.getCreatedAt())
