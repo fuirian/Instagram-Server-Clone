@@ -1,4 +1,4 @@
-package instagram.server.post.controller.dto.responese;
+package instagram.server.post.controller.dto.response;
 
 import instagram.server.post.entity.Post;
 import lombok.Builder;

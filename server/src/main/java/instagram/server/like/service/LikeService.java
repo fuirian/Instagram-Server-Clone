@@ -1,6 +1,6 @@
 package instagram.server.like.service;
 
-import instagram.server.like.controller.dto.request.LikeDto;
+import instagram.server.like.controller.dto.response.LikeDto;
 import instagram.server.like.entity.Like;
 import instagram.server.like.repository.LikeRepository;
 import instagram.server.post.entity.Post;
